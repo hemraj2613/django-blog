@@ -27,7 +27,7 @@ class Blog(models.Model):
     featured_image = models.ImageField(upload_to='uploads/%Y/%m/%d')
     short_description = models.TextField(max_length=500)
     blog_body = models.TextField(max_length=3000)
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
+    status = models.IntegerField(choices=STATUS_CHOICES, default="Draft")
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
