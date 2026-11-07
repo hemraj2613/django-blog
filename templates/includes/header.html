@@ -1,0 +1,51 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
+    <div class="container py-2">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-3" href="/">
+            <span class="brand-icon">B.</span> BlogSpace
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <!-- Navigation -->
+            <ul class="navbar-nav mx-auto gap-lg-3">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+
+                {% for category in categories %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        {{ category.category_name }}
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+
+            <!-- Authentication -->
+            <div class="d-flex gap-2 mt-3 mt-lg-0">
+
+                <a href="#" class="btn btn-outline-dark px-4">
+                    Login
+                </a>
+
+                <a href="#" class="btn btn-primary px-4">
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</nav>

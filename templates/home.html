@@ -1,0 +1,250 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Home | BlogSpace{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Hero Section -->
+    <section class="hero-section mb-5">
+
+        <div class="row align-items-center g-4">
+
+            <div class="col-lg-7">
+
+                <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2">
+                    Welcome to BlogSpace
+                </span>
+
+                <h1 class="display-4 fw-bold mb-3">
+                    Ideas, Stories & Knowledge
+                    <span class="text-primary">For Everyone.</span>
+                </h1>
+
+                <p class="text-secondary fs-5 mb-4">
+                    Explore interesting articles, discover new ideas,
+                    and stay updated with the latest stories from different fields.
+                </p>
+
+                <a href="#recent-posts" class="btn btn-primary btn-lg px-4">
+                    Explore Articles
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+
+            </div>
+
+            <div class="col-lg-5">
+
+                <div class="hero-image-box">
+                    <i class="bi bi-journal-richtext"></i>
+                    <h3>Read. Learn. Grow.</h3>
+                    <p>Knowledge begins with curiosity.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Featured Posts -->
+    <section class="mb-5">
+
+        <div class="section-heading d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+                <span class="section-label">HANDPICKED STORIES</span>
+                <h2 class="fw-bold mt-2">Featured Articles</h2>
+            </div>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for post in featured_post %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="post-card h-100">
+
+                    {% if post.featured_image %}
+                    <div class="post-image">
+                        <img src="{{ post.featured_image.url }}"
+                             alt="{{ post.title }}">
+                    </div>
+                    {% endif %}
+
+                    <div class="p-4">
+
+                        <span class="badge bg-primary-subtle text-primary mb-3">
+                            Featured
+                        </span>
+
+                        <h4 class="fw-bold">
+                            {{ post.title }}
+                        </h4>
+
+                        <p class="text-secondary">
+                            {{ post.short_description|truncatewords:20 }}
+                        </p>
+
+                        <div class="post-meta">
+                            <span>
+                                <i class="bi bi-person"></i>
+                                {{ post.author }}
+                            </span>
+
+                            <span>
+                                {{ post.created_at|timesince }} ago
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+                <p class="text-muted">No featured articles available.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- Recent Posts -->
+    <section id="recent-posts">
+
+        <div class="mb-4">
+            <span class="section-label">LATEST UPDATES</span>
+            <h2 class="fw-bold mt-2">Recent Articles</h2>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Main Posts -->
+            <div class="col-lg-8">
+
+                {% for post in posts %}
+
+                <article class="recent-post-card mb-4">
+
+                    <div class="row g-0 align-items-center">
+
+                        {% if post.featured_image %}
+                        <div class="col-md-4">
+                            <img src="{{ post.featured_image.url }}"
+                                 class="recent-post-image"
+                                 alt="{{ post.title }}">
+                        </div>
+                        {% endif %}
+
+                        <div class="col-md">
+
+                            <div class="p-4">
+
+                                <span class="text-primary small fw-semibold">
+                                    ARTICLE
+                                </span>
+
+                                <h4 class="fw-bold mt-2">
+                                    {{ post.title }}
+                                </h4>
+
+                                <p class="text-secondary">
+                                    {{ post.short_description|truncatewords:25 }}
+                                </p>
+
+                                <div class="post-meta">
+                                    <span>
+                                        <i class="bi bi-person-circle"></i>
+                                        {{ post.author }}
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-clock"></i>
+                                        {{ post.created_at|timesince }} ago
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+                {% empty %}
+
+                <div class="alert alert-light">
+                    No articles published yet.
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- Sidebar -->
+            <aside class="col-lg-4">
+
+                <!-- About -->
+                <div class="sidebar-card mb-4">
+
+                    <h4 class="fw-bold mb-3">About BlogSpace</h4>
+
+                    <p class="text-secondary mb-0">
+                        BlogSpace is a platform for sharing knowledge,
+                        technology, creativity, news, and inspiring stories.
+                        Read something new every day.
+                    </p>
+
+                </div>
+
+
+                {% comment %} <!-- Categories -->
+                <div class="sidebar-card mb-4">
+
+                    <h4 class="fw-bold mb-3">Explore Categories</h4>
+
+                    <ul class="category-list">
+
+                        {% for category in categories %}
+
+                        <li>
+                            <a href="#">
+                                {{ category.category_name }}
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </li>
+
+                        {% empty %}
+
+                        <li>No categories available.</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div> {% endcomment %}
+
+
+            </aside>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
